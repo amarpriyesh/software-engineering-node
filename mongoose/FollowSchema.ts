@@ -1,5 +1,5 @@
 import mongoose, {Schema} from "mongoose";
-import Follow from "../models/follow";
+import Follow from "../models/Follow";
 
 /**
  *The following object defines follow schema to store attributes related to follow relationship.
