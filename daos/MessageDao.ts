@@ -13,6 +13,9 @@ export default class MessageDao implements MessageDaoI {
     async findMessage(uid: string): Promise<Message[]> {
         return await MessageModel.find({from: uid}).populate("message").exec();
     }
+    async findMessageReceived(uid: string): Promise<Message[]> {
+        return await MessageModel.find({to: uid}).populate("message").exec();
+    }
     async recentMessage(uid: string): Promise<Message[]> {
         return await MessageModel.find({from: uid}).where({MessageDate : { $gt:(Date.now()-60000)}}).populate("userMessageing").exec();
     }

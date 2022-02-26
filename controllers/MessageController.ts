@@ -15,11 +15,16 @@ export default class MessageController implements MessageControllerI {
         this.app.delete('/users/:uid1/messages/:uid2', this.deleteMessage);
         this.app.get("/users/:uid1/messages/:uid2",this.findMessageUser);
         this.app.get("/users/:uid/Messages",this.findMessage);
+        this.app.get("/users/Messages/:uid",this.findMessageReceived);
         this.app.get("/users/:uid/recentMessages",this.recentMessage);
 
     }
 
     findMessage=(req: Request, res: Response) =>
+        this.MessageDao.findMessage( req.params.uid)
+            .then(Message => res.json(Message));
+
+    findMessageReceived=(req: Request, res: Response) =>
         this.MessageDao.findMessage( req.params.uid)
             .then(Message => res.json(Message));
 

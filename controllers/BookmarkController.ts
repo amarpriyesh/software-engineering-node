@@ -11,10 +11,10 @@ export default class BookmarkController implements BookmarkControllerI {
     constructor(app: Express, bookmarkDao: BookmarkDao) {
         this.app = app;
         this.bookmarkDao = bookmarkDao;
-        this.app.post('/users/:uid/bookmarks/:tid', this.bookmark);
-        this.app.delete('/users/:uid/unBookmarks/:tid', this.unBookmark);
-        this.app.get("/users/:uid/bookmarks",this.findBookmark);
-        this.app.get("/users/:uid/recentBookmarks",this.recentBookmark);
+        this.app.post('/api/users/:uid/bookmarks/:tid', this.bookmark);
+        this.app.delete('/api/users/:uid/unBookmarks/:tid', this.unBookmark);
+        this.app.get("/api/users/:uid/bookmarks",this.findBookmark);
+        this.app.get("/api/users/:uid/recentBookmarks",this.recentBookmark);
 
     }
 
