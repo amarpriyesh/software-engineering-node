@@ -13,10 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.2",
-    "mongoose": "^6.2.0",
-    "origin": "^0.5.8",
-    "remote": "^0.2.6",
-    "software-engineering-node": "github:amarpriyesh/software-engg-node-priyesh"
+    "mongoose": "^6.2.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
