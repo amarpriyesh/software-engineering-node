@@ -4,6 +4,9 @@ import FollowDao from "./daos/FollowDao";
 const mongoose = require('mongoose');
 //
 //mongoose.connect('mongodb://127.0.0.1:27017/tuiter');
+/**
+ * Database connection string.
+ */
 const mongoString = "mongodb+srv://priyesh:priyesh@cluster0.urb4j.mongodb.net/tuiter?retryWrites=true&w=majority" ;
 
 import UserController from "./controllers/UserController";
@@ -43,14 +46,38 @@ app.get('/', (req: Request, res: Response) =>
         '<html><a>https://soft-eng-priyesh.herokuapp.com/users\n</a>' +
         '<a>https://soft-eng-priyesh.herokuapp.com/users</a></html>'));
 
-
+/**
+ * New controller object passing app and data access object to the controller.
+ */
 new  UserController(app,new UserDao);
+
+/**
+ * New controller object passing app and data access object to the controller.
+ */
 new TuitController(app,new TuitDao);
+
+/**
+ * New controller object passing app and data access object to the controller.
+ */
 new FollowController(app,new FollowDao);
+
+/**
+ * New controller object passing app and data access object to the controller.
+ */
 new BookmarkController(app,new BookmarkDao);
+
+/**
+ * New controller object passing app and data access object to the controller.
+ */
 new MessageController(app,new MessageDao);
+
+/**
+ * New controller object passing app and data access object to the controller.
+ */
 new LikeController(app,new LikeDao);
 
-
+/**
+ * Definition of port.
+ */
 const PORT = 4000;
 app.listen(process.env.PORT || PORT);

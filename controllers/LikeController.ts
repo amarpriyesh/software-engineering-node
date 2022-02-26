@@ -4,17 +4,26 @@ import { ParsedQs } from "qs";
 import LikeDao from "../daos/LikeDao";
 import LikeControllerI from "../interfaces/LikeController";
 
+
+/**
+ * The below class represents Like Controller  which implements LikeControllerI interface.
+ */
 export default class LikeController implements LikeControllerI {
     app: Express;
     LikeDao: LikeDao;
 
+    /**
+     * LikeController constructor
+     * @param app Express
+     * @param LikeDao like object.
+     */
     constructor(app: Express, LikeDao: LikeDao) {
         this.app = app;
         this.LikeDao = LikeDao;
-        this.app.post('/users/:uid/likes/:tid', this.createLike);
-        this.app.delete('/users/:uid/likes/:tid', this.deleteLike);
-        this.app.get("/users/:uid/likes",this.findLike);
-        this.app.get("/tuits/:tid/likes",this.findAllUsersThatLikedTuit);
+        this.app.post('/api/users/:uid/likes/:tid', this.createLike);
+        this.app.delete('/api/users/:uid/likes/:tid', this.deleteLike);
+        this.app.get("/api/users/:uid/likes",this.findLike);
+        this.app.get("/api/tuits/:tid/likes",this.findAllUsersThatLikedTuit);
 
     }
 

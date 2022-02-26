@@ -4,6 +4,10 @@ import { ParsedQs } from "qs";
 import FollowDao from "../daos/FollowDao";
 import FollowControllerI from "../interfaces/FollowController";
 
+
+/**
+ * The below clas srepresents Follow Controller  which implements FollowControllerI interface.
+ */
 export default class FollowController implements FollowControllerI {
     app: Express;
     followDao: FollowDao;

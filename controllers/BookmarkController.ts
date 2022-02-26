@@ -4,10 +4,18 @@ import { ParsedQs } from "qs";
 import BookmarkDao from "../daos/BookmarkDao";
 import BookmarkControllerI from "../interfaces/BookmarkController";
 
+/**
+ * The below clas srepresents bookmark controller which implements BookmarkControllerI interface.
+ */
 export default class BookmarkController implements BookmarkControllerI {
     app: Express;
     bookmarkDao: BookmarkDao;
 
+    /**
+     * The below represents BookmarkController constructor.
+     * @param app Express
+     * @param bookmarkDao Bookmark data access object.
+     */
     constructor(app: Express, bookmarkDao: BookmarkDao) {
         this.app = app;
         this.bookmarkDao = bookmarkDao;

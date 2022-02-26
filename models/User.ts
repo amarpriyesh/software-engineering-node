@@ -2,6 +2,11 @@ import AccountType from "./AccountType";
 import MaritalStatus from "./MaritalStatus";
 import Location from "./Location";
 
+/**
+ * @typedef User Represents User class and its attributes.
+ * @property firstName represents name of the user
+ * @property lastName reprents last name of the user
+ */
 export default class User {
     private username: string = '';
     private password: string = '';

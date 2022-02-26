@@ -2,18 +2,23 @@ import {Request, Response, Express} from "express";
 import TuitDao from "../daos/TuitDao";
 import TuitControllerI from "../interfaces/TuitController";
 
+/**
+ *
+ * The below class represents  Tuit Controller  which implements TuitControllerI interface.
+ *
+ */
 export default class TuitController implements TuitControllerI {
     app: Express;
     tuitDao: TuitDao;
     constructor(app: Express, tuitDao: TuitDao) {
         this.app = app;
         this.tuitDao = tuitDao;
-        this.app.get('/tuits', this.findAllTuits);
-        this.app.get('/users/:uid/tuits', this.findTuitsByUser);
-        this.app.get('/tuits/:uid', this.findTuitById);
-        this.app.post('/tuits', this.createTuit);
-        this.app.delete('/tuits/:uid',this.deleteTuit );
-        this.app.put('/tuits/:uid', this.updateTuit );
+        this.app.get('/api/tuits', this.findAllTuits);
+        this.app.get('/api/users/:uid/tuits', this.findTuitsByUser);
+        this.app.get('/api/tuits/:uid', this.findTuitById);
+        this.app.post('/api/tuits', this.createTuit);
+        this.app.delete('/api/tuits/:uid',this.deleteTuit );
+        this.app.put('/api/tuits/:uid', this.updateTuit );
 
     }
 

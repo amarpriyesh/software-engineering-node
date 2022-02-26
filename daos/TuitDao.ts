@@ -4,6 +4,10 @@ import TuitDaoI from "../interfaces/TuitDao";
 import UserModel from "../mongoose/UserModel";
 import User from "../models/User";
 
+
+/**
+ * The following class represents the tuit data access object.
+ */
 export default class TuitDao implements TuitDaoI{
 
 
