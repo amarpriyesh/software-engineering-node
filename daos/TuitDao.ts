@@ -20,8 +20,8 @@ export default class TuitDao implements TuitDaoI{
        return await  TuitModel.findById(uid)
             .populate("postedBy")
             .exec()};
-    async createTuit ( tuit: Tuit): Promise<Tuit> {
-    return await TuitModel.create(tuit)};
+    async createTuit ( uid: string,tuit: string): Promise<Tuit> {
+    return await TuitModel.create({postedBy: uid , tuit:tuit})};
 
     async updateTuit  (uid: string, tuit: Tuit): Promise<any>{
         return await   TuitModel.updateOne(
