@@ -36,7 +36,7 @@ export default class MessageDao implements MessageDaoI {
      * The below method helps user to find a recent messages.
      */
     async recentMessage(uid: string): Promise<Message[]> {
-        return await MessageModel.find({from: uid}).where({MessageDate : { $gt:(Date.now()-60000)}}).populate("userMessageing").exec();
+        return await MessageModel.find({from: uid}).where({MessageDate : { $gt:(Date.now()-60000)}}).populate("message").exec();
     }
 
 

@@ -25,18 +25,38 @@ export default class UserController implements UserControllerI {
         this.app.delete('/api/users/:userid', this.deleteUser);
         this.app.put('/api/users/:userid', this.updateUser);
     }
+
+    /**
+     * The below method helps to find all the users.
+     */
     findAllUsers = (req: Request, res: Response) =>
         this.userDao.findAllUsers()
             .then(users => res.json(users));
+
+    /**
+     * The below method helps to find users by user id.
+     */
     findUserById = (req: Request, res: Response) =>
         this.userDao.findUserById(req.params.userid)
             .then(user => res.json(user));
+
+    /**
+     * The below method helps to create a user.
+     */
     createUser = (req: Request, res: Response) =>
         this.userDao.createUser(req.body)
             .then(user => res.json(user));
+
+    /**
+     * The below method helps to delete a user.
+     */
     deleteUser = (req: Request, res: Response) =>
         this.userDao.deleteUser(req.params.userid)
             .then(status => res.json(status));
+
+    /**
+     * The below method helps to update a user.
+     */
     updateUser = (req: Request, res: Response) =>
         this.userDao.updateUser(req.params.userid, req.body)
             .then(status => res.json(status));

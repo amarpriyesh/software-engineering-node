@@ -27,23 +27,34 @@ export default class LikeController implements LikeControllerI {
 
     }
 
+    /**
+     * The below method helps user to find users who liked a tuit.
+     */
     findAllUsersThatLikedTuit=(req: Request, res: Response) =>
         this.LikeDao.findAllUsersThatLikedTuit( req.params.tid)
             .then(Like => res.json(Like));
 
 
+    /**
+     * The below method helps user to find  liked a tuit.
+     */
     findLike=(req: Request, res: Response) =>
         this.LikeDao.findLike( req.params.uid)
             .then(Like => res.json(Like));
 
 
+    /**
+     * The below method helps user to like a tuit.
+     */
     createLike=(req: Request, res: Response) =>
         this.LikeDao.createLike( req.params.uid,req.params.tid)
             .then(Like => res.json(Like));
 
 
 
-
+    /**
+     * The below method helps user to delete a tuit.
+     */
     deleteLike = (req: Request, res: Response) =>
         this.LikeDao.deleteLike( req.params.uid,req.params.tid)
             .then(Like => res.json(Like));

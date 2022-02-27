@@ -22,21 +22,45 @@ export default class TuitController implements TuitControllerI {
 
     }
 
+    /**
+     * The below method helps to find all tuits by user id.
+     */
     findAllTuits = (req: Request, res: Response) =>
         this.tuitDao.findAllTuits()
             .then(tuits => res.json(tuits));
+
+
+    /**
+     * The below method helps to find all tuits by user id.
+     */
     findTuitsByUser = (req: Request, res: Response) =>
         this.tuitDao.findTuitsByUser(req.params.uid)
             .then(tuits => res.json(tuits));
+
+    /**
+     * The below method helps to find all tuits by user id.
+     */
     findTuitById = (req: Request, res: Response) =>
         this.tuitDao.findTuitById(req.params.uid)
             .then(tuit => res.json(tuit));
+
+    /**
+     * The below method helps to create a tuit.
+     */
     createTuit = (req: Request, res: Response) =>
         this.tuitDao.createTuit( req.params.uid,req.body.tuit)
             .then(tuit => res.json(tuit));
+
+    /**
+     * The below method helps to update a tuit.
+     */
     updateTuit = (req: Request, res: Response) =>
         this.tuitDao.updateTuit(req.params.uid, req.body)
             .then(status => res.send(status));
+
+    /**
+     * The below method helps to delete a tuit.
+     */
     deleteTuit = (req: Request, res: Response) =>
         this.tuitDao.deleteTuit(req.params.uid)
             .then(status => res.send(status));

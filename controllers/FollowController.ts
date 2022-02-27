@@ -23,26 +23,39 @@ export default class FollowController implements FollowControllerI {
 
     }
 
+    /**
+     * The below method helps to  finnd followers.
+     */
     findFollowers=(req: Request, res: Response) =>
     this.followDao.findFollowers( req.params.uid)
 .then(follow => res.json(follow));
 
+    /**
+     * The below method helps to  finnd followers.
+     */
     recentFollowers=(req: Request, res: Response) =>
         this.followDao.recentFollowers( req.params.uid)
             .then(follow => res.json(follow));
 
+    /**
+     * The below method helps to  finnd followers.
+     */
     findFollow=(req: Request, res: Response) =>
         this.followDao.findFollow( req.params.uid)
             .then(follow => res.json(follow));
 
-
+    /**
+     * The below method helps to  create followers.
+     */
     createFollow=(req: Request, res: Response) =>
         this.followDao.createFollow( req.params.uid1,req.params.uid2)
             .then(follow => res.json(follow));
 
 
 
-
+    /**
+     * The below method helps to  delete followers.
+     */
     deleteFollow = (req: Request, res: Response) =>
         this.followDao.deleteFollow( req.params.uid1,req.params.uid2)
             .then(follow => res.json(follow));

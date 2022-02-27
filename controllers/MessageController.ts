@@ -29,14 +29,23 @@ export default class MessageController implements MessageControllerI {
 
     }
 
+    /**
+     * The below method helps user to find a message.
+     */
     findMessage=(req: Request, res: Response) =>
         this.MessageDao.findMessage( req.params.uid)
             .then(Message => res.json(Message));
 
+    /**
+     * The below method helps user to find received message.
+     */
     findMessageReceived=(req: Request, res: Response) =>
         this.MessageDao.findMessage( req.params.uid)
             .then(Message => res.json(Message));
 
+    /**
+     * The below method helps user to find received message.
+     */
     recentMessage=(req: Request, res: Response) =>
         this.MessageDao.recentMessage( req.params.uid)
             .then(Message => res.json(Message));
@@ -45,13 +54,17 @@ export default class MessageController implements MessageControllerI {
         this.MessageDao.findMessageUser( req.params.uid1,req.params.uid2)
             .then(Message => res.json(Message));
 
-
+    /**
+     * The below method helps user to create message.
+     */
     createMessage=(req: Request, res: Response) =>
         this.MessageDao.createMessage( req.params.uid1,req.params.uid2,req.body.message)
             .then(Message => res.json(Message));
 
 
-
+    /**
+     * The below method helps user to delete a message.
+     */
     deleteMessage = (req: Request, res: Response) =>
         this.MessageDao.deleteMessage( req.params.uid1,req.params.uid2)
             .then(Message => res.json(Message));

@@ -27,20 +27,32 @@ export default class BookmarkController implements BookmarkControllerI {
     }
 
 
-
+    /**
+     * The below method helps to find the book mark.
+     * @param uid user id.
+     */
     findBookmark=(req: Request, res: Response) =>
         this.bookmarkDao.findBookmark(req.params.uid)
             .then(follow => res.json(follow));
-
+    /**
+     * The below method helps to find the recent book mark.
+     * @param uid user id.
+     */
     recentBookmark=(req: Request, res: Response) =>
         this.bookmarkDao.recentBookmark( req.params.uid)
             .then(follow => res.json(follow));
 
+    /**
+     * The below method helps to  create book mark.
+     */
     bookmark=(req: Request, res: Response) =>
         this.bookmarkDao.bookmark( req.params.uid,req.params.tid)
             .then(follow => res.json(follow));
 
 
+    /**
+     * The below method helps to  delete book mark.
+     */
     unBookmark=(req: Request, res: Response) =>
         this.bookmarkDao.unBookmark( req.params.uid,req.params.tid)
             .then(follow => res.json(follow));
