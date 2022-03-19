@@ -9,9 +9,10 @@ const TuitSchema = new mongoose.Schema<Tuit>({
     avatarLogo: String,
     imageOverlay: String,
     stats: {
-        replies: Number,
-        retuits: Number,
-        likes: Number
+        replies: {type: Number,default: 1},
+        retuits: {type: Number,default: 1},
+        likes: {
+            type: Number,default: 1}
     }
 }, {collection: "tuits"});
 export default TuitSchema;
