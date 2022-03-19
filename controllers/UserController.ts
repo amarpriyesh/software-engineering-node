@@ -50,7 +50,8 @@ export default class UserController implements UserControllerI {
 
             app.post("/api/login",
                 UserController.userController.login);
-
+            app.post("/api/register",
+                UserController.userController.register);
             // for testing. Not RESTful
             app.get("/api/users/create",
               UserController.userController.createUser);
@@ -148,4 +149,6 @@ export default class UserController implements UserControllerI {
             .then(user => {
                 
             })
+
+
 };
