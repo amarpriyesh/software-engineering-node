@@ -22,12 +22,14 @@ var cors = require('cors')
 const PROTOCOL = "mongodb+srv";
 const DB_USERNAME = "priyesh";
 const DB_PASSWORD = "priyesh";
-const HOST = "a3.0h3qg.mongodb.net";
+const HOST = "test.bdkji.mongodb.net";
 const DB_NAME = "tuiter";
 const DB_QUERY = "retryWrites=true&w=majority";
 const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;
 // connect to the database
 mongoose.connect(connectionString);
+
+
 
 const app = express();
 app.use(express.json());
