@@ -87,12 +87,12 @@ export default class TuitController implements TuitControllerI {
      * body formatted as JSON containing the new tuit that was inserted in the
      * database
      */
-    createTuitByUser = (req: Request, res: Response) => {
-        if (JSON.parse(JSON.stringify(RoleDao.getInstance().findRole(req.params.uid) )).allowTuits==1) {
+    createTuitByUser = async (req: Request, res: Response) => {
+        if (JSON.parse(JSON.stringify(await RoleDao.getInstance().findRole(req.params.uid))).allowTuits == 1) {
             TuitController.tuitDao.createTuitByUser(req.params.uid, req.body)
                 .then((tuit: Tuit) => res.json(tuit));
-        }
-      else {
+        } else {
+            console.log(JSON.parse(JSON.stringify(await RoleDao.getInstance().findRole(req.params.uid))).allowTuits)
             res.sendStatus(403);
         }
     }
