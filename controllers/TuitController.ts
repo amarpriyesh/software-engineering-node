@@ -5,6 +5,7 @@ import TuitDao from "../daos/TuitDao";
 import Tuit from "../models/tuits/Tuit";
 import {Express, Request, Response} from "express";
 import TuitControllerI from "../interfaces/TuitControllerI";
+import RoleDao from "../daos/RoleDao";
 
 /**
  * @class TuitController Implements RESTful Web service API for tuits resource.
@@ -86,9 +87,15 @@ export default class TuitController implements TuitControllerI {
      * body formatted as JSON containing the new tuit that was inserted in the
      * database
      */
-    createTuitByUser = (req: Request, res: Response) =>
-        TuitController.tuitDao.createTuitByUser(req.params.uid, req.body)
-            .then((tuit: Tuit) => res.json(tuit));
+    createTuitByUser = (req: Request, res: Response) => {
+        if (JSON.parse(JSON.stringify(RoleDao.getInstance().findRole(req.params.uid) )).allowTuits==1) {
+            TuitController.tuitDao.createTuitByUser(req.params.uid, req.body)
+                .then((tuit: Tuit) => res.json(tuit));
+        }
+      else {
+            res.sendStatus(403);
+        }
+    }
 
     /**
      * @param {Request} req Represents request from client, including path

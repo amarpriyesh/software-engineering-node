@@ -5,6 +5,7 @@ import UserDao from "../daos/UserDao";
 import User from "../models/users/User";
 import {Express, Request, Response} from "express";
 import UserControllerI from "../interfaces/UserControllerI";
+import RoleDao from "../daos/RoleDao";
 
 /**
  * @class UserController Implements RESTful Web service API for users resource.
@@ -97,9 +98,12 @@ export default class UserController implements UserControllerI {
      * body formatted as JSON containing the new user that was inserted in the
      * database
      */
-    createUser = (req: Request, res: Response) =>
-        UserController.userDao.createUser(req.body)
+    createUser = (req: Request, res: Response) => {
+     const userRes =  UserController.userDao.createUser(req.body)
             .then((user: User) => res.json(user));
+    // RoleDao.getInstance().createRole(userRes._id);
+
+    }
     
     /**
      * Modifies an existing user instance

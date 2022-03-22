@@ -5,6 +5,8 @@
 import UserModel from "../mongoose/users/UserModel";
 import User from "../models/users/User";
 import UserDaoI from "../interfaces/UserDaoI";
+import RoleModel from "../mongoose/roles/RoleModel";
+import RoleDao from "./RoleDao";
 
 /**
  * @class UserDao Implements Data Access Object managing data storage
@@ -48,8 +50,14 @@ export default class UserDao implements UserDaoI {
      * @param {User} user Instance to be inserted into the database
      * @returns Promise To be notified when user is inserted into the database
      */
-    createUser = async (user: User): Promise<User> =>
-        UserModel.create(user);
+    createUser = async (user: User): Promise<User> => {
+      const userRes= await UserModel.create(user);
+        const json = JSON.parse(JSON.stringify(userRes))._id;
+RoleDao.getInstance().createRole(json);
+        return userRes;
+
+}
+
 
     /**
      * Updates user with new values in database
