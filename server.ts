@@ -35,7 +35,11 @@ mongoose.connect(connectionString);
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    credentials: true,
+    origin: 'https://fluffy-pothos-a08a94.netlify.app'
+    
+}));
 const SECRET = 'process.env.SECRET';
 let sess = {
     secret: SECRET,
