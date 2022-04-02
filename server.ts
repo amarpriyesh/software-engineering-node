@@ -20,6 +20,7 @@ import AuthenticationController from "./controllers/AuthenticationController";
 import mongoose from "mongoose";
 import GroupController from "./controllers/GroupController";
 const cors = require("cors");
+require('dotenv').config();
 const session = require("express-session");
 
 // build the connection string
@@ -34,7 +35,6 @@ const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${
 mongoose.connect(connectionString);
 
 const app = express();
-app.use(express.json());
 app.use(cors({
     credentials: true,
     origin: 'https://fluffy-pothos-a08a94.netlify.app'
@@ -50,12 +50,13 @@ let sess = {
     }
 }
 
-if (process.env.ENVIRONMENT === 'PRODUCTION') {
+/*if (process.env.ENVIRONMENT === 'PRODUCTION') {
     app.set('trust proxy', 1) // trust first proxy
     sess.cookie.secure = true // serve secure cookies
-}
+}*/
 
 app.use(session(sess))
+app.use(express.json());
 
 app.get('/', (req: Request, res: Response) =>
     res.send('Welcome!'));
@@ -70,7 +71,7 @@ const tuitController = TuitController.getInstance(app);
 const likesController = LikeController.getInstance(app);
 SessionController(app);
 AuthenticationController(app);
-GroupController(app);
+
 /**
  * Start a server listening at port 4000 locally
  * but use environment variable PORT on Heroku if available.

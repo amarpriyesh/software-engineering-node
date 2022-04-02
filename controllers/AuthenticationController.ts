@@ -21,6 +21,7 @@ const AuthenticationController = (app: Express) => {
             // @ts-ignore
             req.session['profile'] = existingUser;
             res.json(existingUser);
+            console.log("I am reaching here creating the session");
         } else {
             res.sendStatus(403);
         }
@@ -28,6 +29,7 @@ const AuthenticationController = (app: Express) => {
 
     const register = async (req: Request, res: Response) => {
         const newUser = req.body;
+        console.log('This is the user',newUser)
         const password = newUser.password;
         const hash = await bcrypt.hash(password, saltRounds);
         newUser.password = hash;
