@@ -15,6 +15,7 @@ import CourseController from "./controllers/CourseController";
 import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
 import LikeController from "./controllers/LikeController";
+import DisLikeController from "./controllers/DislikeController";
 import SessionController from "./controllers/SessionController";
 import AuthenticationController from "./controllers/AuthenticationController";
 import mongoose from "mongoose";
@@ -37,7 +38,7 @@ mongoose.connect(connectionString);
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: 'https://priyesh-a4.netlify.app'
+    origin: ['https://priyesh-a4.netlify.app','http://localhost:3000']
 }));
 
 const SECRET = 'process.env.SECRET';
@@ -69,6 +70,7 @@ const courseController = new CourseController(app);
 const userController = UserController.getInstance(app);
 const tuitController = TuitController.getInstance(app);
 const likesController = LikeController.getInstance(app);
+const dislikesController = DisLikeController.getInstance(app);
 SessionController(app);
 AuthenticationController(app);
 
