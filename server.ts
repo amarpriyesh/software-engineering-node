@@ -46,14 +46,14 @@ let sess = {
     saveUninitialized: true,
     resave: true,
     cookie: {
-        secure: false
+        sameSite:'none',
+        secure: true
     }
 }
 
-/*if (process.env.ENVIRONMENT === 'PRODUCTION') {
+if (process.env.ENVIRONMENT === 'PRODUCTION') {
     app.set('trust proxy', 1) // trust first proxy
-    sess.cookie.secure = true // serve secure cookies
-}*/
+}
 
 app.use(session(sess))
 app.use(express.json());
