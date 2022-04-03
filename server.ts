@@ -37,8 +37,7 @@ mongoose.connect(connectionString);
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: 'https://fluffy-pothos-a08a94.netlify.app'
-    
+    origin: 'https://priyesh-a4.netlify.app'
 }));
 const SECRET = 'process.env.SECRET';
 let sess = {
@@ -46,14 +45,14 @@ let sess = {
     saveUninitialized: true,
     resave: true,
     cookie: {
-        secure: false
+        sameSite:'none',
+        secure: true
     }
 }
 
-/*if (process.env.ENVIRONMENT === 'PRODUCTION') {
+if (process.env.ENVIRONMENT === 'PRODUCTION') {
     app.set('trust proxy', 1) // trust first proxy
-    sess.cookie.secure = true // serve secure cookies
-}*/
+}
 
 app.use(session(sess))
 app.use(express.json());
