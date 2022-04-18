@@ -8,14 +8,14 @@ import UnlikeControllerI from "../interfaces/UnlikeControllerI";
 import TuitDao from "../daos/TuitDao";
 
 /**
- * @class TuitController Implements RESTful Web service API for likes resource.
+ * @class DisLikeController Implements RESTful Web service API for likes resource.
  * Defines the following HTTP endpoints:
  * <ul>
- *     <li>GET /api/users/:uid/likes to retrieve all the tuits liked by a user
+ *     <li>GET /api/users/:uid/unlikes to retrieve all the tuits liked by a user
  *     </li>
- *     <li>GET /api/tuits/:tid/likes to retrieve all users that liked a tuit
+ *     <li>GET /api/tuits/:tid/unlikes to retrieve all users that liked a tuit
  *     </li>
- *     <li>POST /api/users/:uid/likes/:tid to record that a user likes a tuit
+ *     <li>POST /api/users/:uid/unlikes/:tid to record that a user likes a tuit
  *     </li>
  *     <li>DELETE /api/users/:uid/unlikes/:tid to record that a user
  *     no londer likes a tuit</li>
@@ -32,7 +32,7 @@ export default class DislikeController implements UnlikeControllerI {
      * Creates singleton controller instance
      * @param {Express} app Express instance to declare the RESTful Web service
      * API
-     * @return TuitController
+     * @return DislikeController
      */
     public static getInstance = (app: Express): DislikeController => {
         if(DislikeController.dislikeController === null) {
@@ -47,20 +47,19 @@ export default class DislikeController implements UnlikeControllerI {
     private constructor() {}
 
     /**
-     * Retrieves all users that liked a tuit from the database
+     * Retrieves all users that unliked a tuit from the database
      * @param {Request} req Represents request from client, including the path
      * parameter tid representing the liked tuit
      * @param {Response} res Represents response to client, including the
      * body formatted as JSON arrays containing the user objects
      */
 
-
 findAllUsersThatUnlikedTuit = (req: Request, res: Response) =>
     DislikeController.UnlikeDao.findAllUsersThatUnlikedTuit(req.params.tid)
             .then(likes => res.json(likes));
 
     /**
-     * Retrieves all tuits liked by a user from the database
+     * Retrieves all tuits unliked by a user from the database
      * @param {Request} req Represents request from client, including the path
      * parameter uid representing the user liked the tuits
      * @param {Response} res Represents response to client, including the
@@ -73,6 +72,10 @@ findAllUsersThatUnlikedTuit = (req: Request, res: Response) =>
         const profile = req.session['profile'];
         const userId = uid === "me" && profile ?
             profile._id : uid;
+        if (userId === "my") {
+            res.sendStatus(503);
+            return;
+        }
 
        DislikeController.UnlikeDao.findAllTuitsUnlikedByUser(userId).then(likes => {
                 const likesNonNullTuits = likes.filter(like => like.tuit);
@@ -100,6 +103,10 @@ findAllUsersThatUnlikedTuit = (req: Request, res: Response) =>
         const profile = req.session['profile'];
         const userId = uid === "me" && profile ?
             profile._id : uid;
+        if (userId === "my") {
+            res.sendStatus(503);
+            return;
+        }
         try {
             const userAlreadyUnLikedTuit = await UnlikeDao.findUserUnlikesTuit(userId, tid);
             const howManyUnLikedTuit = await UnlikeDao.countHowManyUnLikedTuit(tid);

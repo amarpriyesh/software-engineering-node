@@ -70,6 +70,10 @@ export default class LikeController implements LikeControllerI {
         const profile = req.session['profile'];
         const userId = uid === "me" && profile ?
             profile._id : uid;
+        if (userId === "my") {
+            res.sendStatus(503);
+            return;
+        }
 
         LikeController.likeDao.findAllTuitsLikedByUser(userId)
             .then(likes => {
@@ -98,6 +102,10 @@ export default class LikeController implements LikeControllerI {
         const profile = req.session['profile'];
         const userId = uid === "me" && profile ?
             profile._id : uid;
+        if (userId === "my") {
+            res.sendStatus(503);
+            return;
+        }
         try {
             const userAlreadyLikedTuit = await likeDao.findUserLikesTuit(userId, tid);
             const howManyLikedTuit = await likeDao.countHowManyLikedTuit(tid);
