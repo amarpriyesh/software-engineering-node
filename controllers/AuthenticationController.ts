@@ -27,6 +27,31 @@ const AuthenticationController = (app: Express) => {
         }
     }
 
+    const googleLogin = async (req: Request, res: Response) => {
+        const newUser = req.body;
+        console.log('This is the user',newUser)
+        const password = newUser.password;
+        const hash = await bcrypt.hash(password, saltRounds);
+        newUser.password = hash;
+
+        const existingUser = await userDao
+            .findUserByUsername(req.body.username);
+        if (existingUser) {
+            existingUser.password = '*****';
+            // @ts-ignore
+            req.session['profile'] = existingUser;
+            res.json(existingUser);
+            console.log("I am reaching here creating the session");
+        } else {
+            const insertedUser = await userDao
+                .createUser(newUser);
+            insertedUser.password = '';
+            // @ts-ignore
+            req.session['profile'] = insertedUser;
+            res.json(insertedUser);
+        }
+    }
+
     const register = async (req: Request, res: Response) => {
         const newUser = req.body;
         console.log('This is the user',newUser)
@@ -66,6 +91,7 @@ const AuthenticationController = (app: Express) => {
     }
 
     app.post("/api/auth/login", login);
+    app.post("/api/auth/googleLogin", googleLogin);
     app.post("/api/auth/register", register);
     app.post("/api/auth/profile", profile);
     app.post("/api/auth/logout", logout);

@@ -4,5 +4,5 @@
  */
 import mongoose from "mongoose";
 import UnlikeSchema from "./UnlikeSchema";
-const UnlikeModel = mongoose.model("LikeModel", UnlikeSchema);
+const UnlikeModel = mongoose.model("UnlikeModel", UnlikeSchema);
 export default UnlikeModel;
